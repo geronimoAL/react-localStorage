@@ -1,9 +1,13 @@
 "use client"
 import React, { useState } from 'react'
-function CreadorTarea () {
+interface CreadorTareaProps {
+  crearTarea: (tarea: string) => void;
+}
+function CreadorTarea ({crearTarea}:CreadorTareaProps) {
   const [tarea, setTarea] = useState("")
   const handleSubmit=(event: React.FormEvent<HTMLFormElement>)=>{
     event.preventDefault();
+    crearTarea(tarea)
     localStorage.setItem("task",tarea)
     setTarea("")
   }
