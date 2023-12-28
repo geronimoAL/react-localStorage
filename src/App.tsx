@@ -32,7 +32,8 @@ function App() {
   return (
     <>
       <CreadorTarea crearTarea={crearTarea} />
-      <TablaTarea tareas={tareas} cambiarValorDone={cambiarValorDone}/>
+      <TablaTarea tareas={tareas} cambiarValorDone={cambiarValorDone} showCompleted={false}/>
+      <TablaTarea tareas={tareas} cambiarValorDone={cambiarValorDone} showCompleted={true}/>
     </>
   );
 }

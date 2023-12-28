@@ -4,8 +4,22 @@ import TareaFila from './TareaFila'
 interface Tareas{
     tareas:Tarea[]
     cambiarValorDone: (tarea: Tarea) => void;
+    showCompleted:boolean
 }
-function TablaTarea({tareas,cambiarValorDone}:Tareas) {
+function TablaTarea({tareas,cambiarValorDone,showCompleted}:Tareas) {
+ console.log(showCompleted)
+ const tareaTablaFila=(valorDone:boolean)=>{
+
+  return (
+    tareas
+    .filter(tarea=> tarea.done === valorDone)
+    .map((tarea) => (
+      <TareaFila tarea={tarea} key={tarea.name} cambiarValorDone={cambiarValorDone}/>
+    ))
+  )
+
+ }
+
   return (
     <>
        <table>
@@ -15,9 +29,9 @@ function TablaTarea({tareas,cambiarValorDone}:Tareas) {
           </tr>
         </thead>
         <tbody>
-          {tareas.map((tarea) => (
-            <TareaFila tarea={tarea} key={tarea.name} cambiarValorDone={cambiarValorDone}/>
-          ))}
+          {
+          tareaTablaFila(showCompleted)
+          }
         </tbody>
       </table>
     </>
