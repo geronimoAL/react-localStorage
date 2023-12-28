@@ -8,7 +8,6 @@ function CreadorTarea ({crearTarea}:CreadorTareaProps) {
   const handleSubmit=(event: React.FormEvent<HTMLFormElement>)=>{
     event.preventDefault();
     crearTarea(tarea)
-    localStorage.setItem("task",tarea)
     setTarea("")
   }
     return (
