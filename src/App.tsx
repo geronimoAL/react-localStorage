@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
@@ -8,32 +8,49 @@ import TablaTarea from "./components/TablaTarea";
 
 function App() {
   const [tareas, setTareas] = useState<Tarea[]>([]);
-
-  function crearTarea(tareaNueva:string) {
-  if(!tareas.find(tarea => tarea.name === tareaNueva)){
-    setTareas([...tareas, {name:tareaNueva, done:false}])
+  const [mostrarCompletados, SetMostrarCompletados] = useState(false);
+  function crearTarea(tareaNueva: string) {
+    if (!tareas.find((tarea) => tarea.name === tareaNueva)) {
+      setTareas([...tareas, { name: tareaNueva, done: false }]);
+    }
   }
+  function cambiarValorDone(tarea: Tarea) {
+    setTareas(
+      tareas.map((t) => (t.name == tarea.name ? { ...t, done: !t.done } : t))
+    );
   }
-  function cambiarValorDone(tarea:Tarea){
-   setTareas(
-   tareas.map(t=> (t.name==tarea.name) ? {...t,done: !t.done} : t )
-  )
-  }
-  useEffect(()=>{
-  let data= localStorage.getItem("tareas")
-  if (data){
-    setTareas(JSON.parse(data))
-  }
-  },[])
-  useEffect(()=>{
-  localStorage.setItem("tareas", JSON.stringify(tareas))
-  },[tareas])
+  useEffect(() => {
+    let data = localStorage.getItem("tareas");
+    if (data) {
+      setTareas(JSON.parse(data));
+    }
+  }, []);
+  useEffect(() => {
+    localStorage.setItem("tareas", JSON.stringify(tareas));
+  }, [tareas]);
 
   return (
     <>
       <CreadorTarea crearTarea={crearTarea} />
-      <TablaTarea tareas={tareas} cambiarValorDone={cambiarValorDone} showCompleted={false}/>
-      <TablaTarea tareas={tareas} cambiarValorDone={cambiarValorDone} showCompleted={true}/>
+      <TablaTarea
+        tareas={tareas}
+        cambiarValorDone={cambiarValorDone}
+        showCompleted={false}
+      />
+      <div>
+        <input
+          type="checkbox"
+          onChange={(e) => SetMostrarCompletados(!mostrarCompletados)}
+        />{" "}
+        <label>Mostrar tareas hechas</label>
+      </div>
+      {mostrarCompletados && (
+        <TablaTarea
+          tareas={tareas}
+          cambiarValorDone={cambiarValorDone}
+          showCompleted={true}
+        />
+      )}
     </>
   );
 }
