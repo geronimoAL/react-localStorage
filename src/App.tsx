@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+
 import CreadorTarea from "./components/CreadorTarea";
 import Tarea from "./interface/tarea";
 import TablaTarea from "./components/TablaTarea";
@@ -9,7 +7,7 @@ import ControlTareas from "./components/ControlTareas";
 
 function App() {
   const [tareas, setTareas] = useState<Tarea[]>([]);
-  const [mostrarCompletados, SetMostrarCompletados] = useState(false);
+  const [mostrarCompletados, setMostrarCompletados] = useState(false);
 
   function crearTarea(tareaNueva: string) {
     if (!tareas.find((tarea) => tarea.name === tareaNueva)) {
@@ -23,9 +21,9 @@ function App() {
     );
   }
 
-  function borrarTareas(){
-    setTareas(tareas.filter(tarea=> !tarea.done))
-    SetMostrarCompletados(false)
+  function borrarTareas() {
+    setTareas(tareas.filter((tarea) => !tarea.done));
+    setMostrarCompletados(false);
   }
 
   useEffect(() => {
@@ -34,27 +32,37 @@ function App() {
       setTareas(JSON.parse(data));
     }
   }, []);
+  
   useEffect(() => {
     localStorage.setItem("tareas", JSON.stringify(tareas));
   }, [tareas]);
 
   return (
     <>
-      <CreadorTarea crearTarea={crearTarea} />
-      <TablaTarea
-        tareas={tareas}
-        cambiarValorDone={cambiarValorDone}
-        showCompleted={false}
-      />
-     <ControlTareas isChecked={mostrarCompletados}  SetMostrarCompletados={SetMostrarCompletados} mostrarCompletados={mostrarCompletados} borrarTareas={borrarTareas}/>
+      <main className="bg-dark vh-100 text-white">
+        <div className="container p-2">
+          <CreadorTarea crearTarea={crearTarea} />
+          <TablaTarea
+            tareas={tareas}
+            cambiarValorDone={cambiarValorDone}
+            showCompleted={false}
+          />
+          <ControlTareas
+            isChecked={mostrarCompletados}
+            setMostrarCompletados={setMostrarCompletados}
+            mostrarCompletados={mostrarCompletados}
+            borrarTareas={borrarTareas}
+          />
 
-      {mostrarCompletados && (
-        <TablaTarea
-          tareas={tareas}
-          cambiarValorDone={cambiarValorDone}
-          showCompleted={true}
-        />
-      )}
+          {mostrarCompletados && (
+            <TablaTarea
+              tareas={tareas}
+              cambiarValorDone={cambiarValorDone}
+              showCompleted={true}
+            />
+          )}
+        </div>
+      </main>
     </>
   );
 }
