@@ -1,30 +1,19 @@
-# React + TypeScript + Vite
+# Administración de tareas 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+En esta aplicación, las tareas agregadas se almacenan en el localStorage, un sistema de almacenamiento web proporcionado por los navegadores. Permite a los sitios y aplicaciones web almacenar datos localmente en el dispositivo del usuario, persistiendo incluso después de cerrar la ventana o pestaña del navegador.
 
-Currently, two official plugins are available:
+## Funcionalidades 
+- **Agregar tareas:**  Puedes agregar nuevas tareas a la lista, y se almacenarán localmente en el localStorage.
+  
+- **Marcar tareas como completadas:**  Al hacer clic en una tarea, se moverá a otra tabla indicando que ha sido completada.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Ver tareas completadas:**  Hay un botón que te permite ver todas las tareas que has marcado como completadas.
 
-## Expanding the ESLint configuration
+- **Eliminar todas las tareas completadas:** Se proporciona un botón para eliminar todas las tareas que has completado.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Tecnologías Utilizadas
+- React 18.2.0
+- Bootstrap 5.3.2
 
-- Configure the top-level `parserOptions` property like this:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
