@@ -14,6 +14,7 @@ En esta aplicación, las tareas agregadas se almacenan en el localStorage, un si
 ## Tecnologías Utilizadas
 - React 18.2.0
 - Bootstrap 5.3.2
+- TypeScript
 
 
 
